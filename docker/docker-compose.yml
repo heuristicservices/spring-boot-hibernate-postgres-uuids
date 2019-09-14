@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  postgres:
+    restart: unless-stopped
+    image: postgres:11-alpine
+    ports:
+    - "5432:5432"
+    expose:
+    - 5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: spring_boot_uuids
+    volumes: 
+    - ./docker-entrypoint-initdb.d/create_uuid_extension.sql:/docker-entrypoint-initdb.d/create_uuid_extension.sql
